@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlatEditor\DependencyInjection\Compiler;
+namespace MarkFlat\MarkFlatEditor\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
