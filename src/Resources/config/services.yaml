@@ -1,9 +1,14 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    MarkFlatEditor\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
     MarkFlatEditor\Controller\AdminController:
         arguments:
             $adminPassword: '%mark_flat_editor.admin_password%'
         tags: ['controller.service_arguments']
-
-    mark_flat_editor.twig.extension:
-        class: Symfony\Bridge\Twig\Extension\RoutingExtension
-        tags: ['twig.extension']
