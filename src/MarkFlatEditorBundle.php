@@ -1,8 +1,8 @@
 <?php
 
-namespace MarkFlatEditor;
+namespace MarkFlat\MarkFlatEditor;
 
-use MarkFlatEditor\DependencyInjection\Compiler\TwigExtensionPass;
+use MarkFlat\MarkFlatEditor\DependencyInjection\Compiler\TwigExtensionPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

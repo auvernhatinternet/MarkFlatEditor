@@ -1,30 +1,31 @@
 {
     "name": "markflat/markflat-editor",
-    "description": "MarkFlat Editor",
+    "description": "Editor bundle for MarkFlat CMS",
+    "type": "symfony-bundle",
     "keywords": [
         "markflat"
     ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MarkFlatEditor\\": "src/"
+            "MarkFlat\\MarkFlatEditor\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MarkFlatEditor\\Tests\\": "tests/"
+            "MarkFlat\\MarkFlatEditor\\Tests\\": "tests/"
         }
     },
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "symfony/config": "^7.0",
         "symfony/dependency-injection": "^7.0",
+        "symfony/framework-bundle": "^7.2",
         "symfony/routing": "^7.0",
         "symfony/twig-bundle": "^7.0",
         "twig/twig": "^3.0.4"
     },
     "require-dev": {
-        "symfony/framework-bundle": "^7.0",
         "symfony/phpunit-bridge": "^7.0",
         "symfony/var-dumper": "^7.0",
         "phpstan/phpstan": "2.1.x-dev"
