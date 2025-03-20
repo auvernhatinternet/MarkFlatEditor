@@ -26,7 +26,8 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfony/twig-bundle": "^7.0",
         "symfony/var-dumper": "^7.0",
-        "twig/twig": "^3.0.4"
+        "twig/twig": "^3.0.4",
+        "phpstan/phpstan": "2.1.x-dev"
     },
     "minimum-stability": "dev"
 }
