@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlatEditor;
+namespace MarkFlat\MarkFlatEditor;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

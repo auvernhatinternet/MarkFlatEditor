@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlatEditor\Controller;
+namespace MarkFlat\MarkFlatEditor\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

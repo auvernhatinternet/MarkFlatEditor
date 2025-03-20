@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlatEditor\DependencyInjection;
+namespace MarkFlat\MarkFlatEditor\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

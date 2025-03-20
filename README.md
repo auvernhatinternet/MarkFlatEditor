@@ -1,27 +1,27 @@
 # MarkFlat Editor Bundle
 
-Un bundle Symfony pour éditer des fichiers Markdown avec une interface d'administration sécurisée.
+A Symfony bundle for editing Markdown files with a secure administration interface.
 
 ## Installation
 
-1. Installez le bundle via Composer :
+1. Install the bundle via Composer :
 ```bash
 composer require markflat/markflat-editor
 ```
 
-2. Ajoutez le bundle dans votre `config/bundles.php` :
+2. Add the bundle to your `config/bundles.php` :
 ```php
 return [
     // ...
-    MarkFlatEditor\MarkFlatEditorBundle::class => ['all' => true],
+    MarkFlat\MarkFlatEditor\MarkFlatEditorBundle::class => ['all' => true],
 ];
 ```
 
-3. Ajoutez la configuration suivante dans votre fichier `.env` :
+3. Add the following configuration to your `.env` file :
 ```
-ADMIN_PASSWORD=votre_mot_de_passe_admin
+ADMIN_PASSWORD=your_admin_password
 ```
 
-## Utilisation
+## Usage
 
-Accédez à l'interface d'administration via l'URL : `/admin?password=votre_mot_de_passe_admin`
+Access the administration interface via URL : `/admin?password=your_admin_password`
