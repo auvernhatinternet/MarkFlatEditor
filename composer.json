@@ -4,16 +4,15 @@
     "keywords": [
         "markflat"
     ],
-    "homepage": "https://markflat.io",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MarkFlat\\MarkFlatEditorBundle\\": "src/"
+            "MarkFlat\\MarkFlatEditor\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MarkFlat\\MarkFlatEditorBundle\\Tests\\": "tests/"
+            "MarkFlat\\MarkFlatEditor\\Tests\\": "tests/"
         }
     },
     "require": {

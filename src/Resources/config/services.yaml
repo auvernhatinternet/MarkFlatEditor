@@ -1,5 +1,5 @@
 services:
-    MarkFlatEditor\Controller\AdminController:
+    MarkFlat\MarkFlatEditor\Controller\AdminController:
         arguments:
             $adminPassword: '%mark_flat_editor.admin_password%'
         tags: ['controller.service_arguments']
