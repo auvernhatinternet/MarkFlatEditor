@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Symfony\Component\Filesystem\Filesystem;
+
+/**
+ * Links the local markflatEditor directory to the vendor/markflat/markflat-editor package.
+ */
+
+$copy = false !== $k = array_search('--copy', $argv, true);
+$copy && array_splice($argv, $k, 1);
+$rollback = false !== $k = array_search('--rollback', $argv, true);
+$rollback && array_splice($argv, $k, 1);
+$pathToProject = $argv[1] ?? getcwd();
+
+$markflatEditorPath = __DIR__;
+$vendorPath = "$pathToProject/vendor/markflat/markflat-editor";
+
+if (!is_dir($markflatEditorPath) || !is_dir($vendorPath)) {
+    echo 'Links the local markflatEditor directory to the vendor/markflat/markflat-editor package.'.PHP_EOL.PHP_EOL;
+    echo "Usage: $argv[0] /path/to/the/project".PHP_EOL;
+    echo '       Use `--copy` to copy the directory instead of symlink'.PHP_EOL.PHP_EOL;
+    echo '       Use `--rollback` to rollback'.PHP_EOL.PHP_EOL;
+    echo "The directory \"$markflatEditorPath\" or \"$vendorPath\" does not exist.".PHP_EOL;
+    exit(1);
+}
+
+$filesystem = new Filesystem();
+
+if ($rollback) {
+    $filesystem->remove($vendorPath);
+    echo "\"markflat/markflat-editor\" has been rolled back from \"$markflatEditorPath\".".PHP_EOL;
+    exit(0);
+}
+
+if (!$copy && is_link($vendorPath)) {
+    echo "\"markflat/markflat-editor\" is already a symlink, skipping.".PHP_EOL;
+    exit(0);
+}
+
+$filesystem->remove($vendorPath);
+
+if ($copy) {
+    $filesystem->mirror($markflatEditorPath, $vendorPath);
+    echo "\"markflat/markflat-editor\" has been copied from \"$markflatEditorPath\".".PHP_EOL;
+} else {
+    $filesystem->symlink($markflatEditorPath, $vendorPath);
+    echo "\"markflat/markflat-editor\" has been linked to \"$markflatEditorPath\".".PHP_EOL;
+}
