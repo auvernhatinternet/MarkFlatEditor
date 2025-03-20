@@ -13,7 +13,7 @@ composer require markflat/markflat-editor
 ```php
 return [
     // ...
-    MarkFlat\MarkFlatEditor\MarkFlatEditorBundle::class => ['all' => true],
+    MarkFlatEditor\MarkFlatEditorBundle::class => ['all' => true],
 ];
 ```
 
