@@ -1,0 +1,32 @@
+{
+    "name": "markflat/markflat-editor",
+    "description": "MarkFlat Editor",
+    "keywords": [
+        "markflat"
+    ],
+    "homepage": "https://markflat.io",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "MarkFlat\\MarkFlatEditorBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MarkFlat\\MarkFlatEditorBundle\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "symfony/config": "^7.0",
+        "symfony/dependency-injection": "^7.0"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "^7.0",
+        "symfony/phpunit-bridge": "^7.0",
+        "symfony/twig-bundle": "^7.0",
+        "symfony/var-dumper": "^7.0",
+        "twig/twig": "^3.0.4"
+    },
+    "minimum-stability": "dev"
+}
