@@ -7,12 +7,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "MarkFlat\\MarkFlatEditor\\": "src/"
+            "MarkFlatEditor\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MarkFlat\\MarkFlatEditor\\Tests\\": "tests/"
+            "MarkFlatEditor\\Tests\\": "tests/"
         }
     },
     "require": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlat\MarkFlatEditor\DependencyInjection;
+namespace MarkFlatEditor\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
