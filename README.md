@@ -1,5 +1,5 @@
 ![Packagist Version](https://img.shields.io/packagist/v/auvernhatinternet/markflat-editor)
-[![PHP Tests](https://github.com/auvernhatinternet/markflat-editor/actions/workflows/php.yml/badge.svg)](https://github.com/auvernhatinternet/markflat-editor/actions/workflows/php.yml)
+[![PHP Tests](https://github.com/auvernhatinternet/MarkFlatEditor/actions/workflows/php.yml/badge.svg)](https://github.com/auvernhatinternet/MarkFlatEditor/actions/workflows/php.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # MarkFlat Editor Bundle
