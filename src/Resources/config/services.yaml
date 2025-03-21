@@ -4,11 +4,18 @@ services:
         autoconfigure: true
         public: false
 
-    MarkFlatEditor\Controller\:
+    MarkFlat\MarkFlatEditor\Controller\:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
-    MarkFlatEditor\Controller\AdminController:
+    MarkFlat\MarkFlatEditor\Service\:
+        resource: '../../Service'
+
+    MarkFlat\MarkFlatEditor\Controller\AdminController:
         arguments:
             $adminPassword: '%mark_flat_editor.admin_password%'
         tags: ['controller.service_arguments']
+
+    MarkFlat\MarkFlatEditor\Service\ContentManager:
+        arguments:
+            $projectDir: '%kernel.project_dir%'

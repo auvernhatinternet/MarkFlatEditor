@@ -1,6 +1,6 @@
 <?php
 
-namespace MarkFlatEditor\DependencyInjection;
+namespace MarkFlat\MarkFlatEditor\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -10,6 +10,11 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class MarkFlatEditorExtension extends Extension implements PrependExtensionInterface
 {
+    public function getAlias(): string
+    {
+        return 'mark_flat_editor';
+    }
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -26,7 +31,6 @@ class MarkFlatEditorExtension extends Extension implements PrependExtensionInter
 
     public function prepend(ContainerBuilder $container): void
     {
-        // Ensure TwigBundle is properly configured
         if (!$container->hasExtension('twig')) {
             return;
         }
@@ -34,6 +38,17 @@ class MarkFlatEditorExtension extends Extension implements PrependExtensionInter
         $container->prependExtensionConfig('twig', [
             'paths' => [
                 __DIR__ . '/../Resources/views' => 'MarkFlatEditor'
+            ]
+        ]);
+
+        if (!$container->hasExtension('framework')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('framework', [
+            'router' => [
+                'resource' => __DIR__ . '/../Resources/config/routes.yaml',
+                'type' => 'yaml'
             ]
         ]);
     }

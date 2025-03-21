@@ -1,0 +1,81 @@
+{% extends '@MarkFlatEditor/layout.html.twig' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Edit: {{ path }}</h1>
+                <a href="{{ path('mark_flat_editor_admin', {'password': password}) }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Files
+                </a>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form id="editorForm" method="post">
+                        <textarea id="editor" name="content">{{ content }}</textarea>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<style>
+    .editor-toolbar button {
+        box-sizing: content-box !important;
+    }
+</style>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var easyMDE = new EasyMDE({ 
+        element: document.getElementById("editor"),
+        spellChecker: false,
+        autosave: {
+            enabled: true,
+            uniqueId: "markflat_{{ path }}",
+            delay: 1000,
+        }
+    });
+
+    document.getElementById('editorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var content = easyMDE.value();
+        var formData = new FormData();
+        formData.append('content', content);
+
+        fetch('{{ path('mark_flat_editor_save', {'path': path, 'password': password}) }}', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Changes saved successfully!');
+            } else {
+                alert('Error: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error saving changes. Please try again.');
+        });
+    });
+});
+</script>
+{% endblock %}
