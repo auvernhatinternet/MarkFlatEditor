@@ -1,6 +1,6 @@
 {
     "name": "markflat/markflat-editor",
-    "description": "Editor bundle for MarkFlat CMS",
+    "description": "MarkFlat Editor",
     "type": "symfony-bundle",
     "keywords": [
         "markflat"
@@ -17,10 +17,11 @@
         }
     },
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.1",
         "symfony/config": "^7.0",
         "symfony/dependency-injection": "^7.0",
-        "symfony/framework-bundle": "^7.2",
+        "symfony/framework-bundle": "^7.0",
+        "symfony/http-kernel": "^7.0",
         "symfony/routing": "^7.0",
         "symfony/twig-bundle": "^7.0",
         "twig/twig": "^3.0.4"
@@ -30,5 +31,10 @@
         "symfony/var-dumper": "^7.0",
         "phpstan/phpstan": "2.1.x-dev"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
+        }
+    }
 }
