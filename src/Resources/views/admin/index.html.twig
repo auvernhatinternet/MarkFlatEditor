@@ -1,17 +1,155 @@
 {% extends '@MarkFlatEditor/layout.html.twig' %}
+{% import '@MarkFlatEditor/admin/tree.html.twig' as tree_macros %}
 
 {% block content %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
-            <h1>MarkFlat Editor Admin</h1>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Content Files</h1>
+            </div>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Welcome to the Admin Panel</h5>
-                    <p class="card-text">You are now logged in as administrator.</p>
+                    <div class="content-tree mt-4">
+                        {% if contentTree is empty %}
+                            <p class="text-muted">No markdown files found in the content directory.</p>
+                        {% else %}
+                            {{ tree_macros.render_tree(contentTree, '', password) }}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- New File Modal -->
+<div class="modal fade" id="newFileModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New File</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="fileName" class="form-label">File Name</label>
+                    <input type="text" class="form-control" id="fileName" placeholder="example.md">
+                    <div class="form-text">The .md extension will be added automatically if not provided.</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="createFileBtn">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+    .content-tree {
+        font-size: 0.95rem;
+    }
+    .content-tree i {
+        margin-right: 0.5rem;
+        color: #666;
+    }
+    .content-tree .bi-folder {
+        color: #ffc107;
+    }
+    .content-tree .bi-file-text {
+        color: #0d6efd;
+    }
+    .content-tree .btn {
+        padding: 0.1rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    .folder-item {
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentPath = '';
+    let currentPassword = '';
+    const modal = new bootstrap.Modal(document.getElementById('newFileModal'));
+
+    // Handle new file button clicks
+    document.querySelectorAll('.new-file').forEach(button => {
+        button.addEventListener('click', function() {
+            currentPath = this.dataset.path;
+            currentPassword = this.dataset.password;
+            document.getElementById('fileName').value = '';
+            modal.show();
+        });
+    });
+
+    // Handle create file
+    document.getElementById('createFileBtn').addEventListener('click', function() {
+        const fileName = document.getElementById('fileName').value.trim();
+        if (!fileName) {
+            alert('Please enter a file name');
+            return;
+        }
+
+        const path = currentPath ? `${currentPath}/${fileName}` : fileName;
+        const formData = new FormData();
+        formData.append('path', path);
+
+        fetch(`{{ path('mark_flat_editor_create') }}?password=${currentPassword}`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                modal.hide();
+                window.location.reload();
+            } else {
+                alert('Error: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error creating file. Please try again.');
+        });
+    });
+
+    // Handle delete file
+    document.querySelectorAll('.delete-file').forEach(button => {
+        button.addEventListener('click', function() {
+            if (!confirm('Are you sure you want to delete this file?')) {
+                return;
+            }
+
+            const path = this.dataset.path;
+            const password = this.dataset.password;
+
+            fetch(`{{ path('mark_flat_editor_delete', {'path': 'PLACEHOLDER'}) }}?password=${password}`.replace('PLACEHOLDER', path), {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Error: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error deleting file. Please try again.');
+            });
+        });
+    });
+});
+</script>
 {% endblock %}
