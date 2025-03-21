@@ -35,7 +35,7 @@ class ContentManager
             $relativePath = $this->getRelativePath($file);
             $parts = explode('/', $relativePath);
             $current = &$tree;
-            
+
             foreach ($parts as $part) {
                 if (!isset($current[$part])) {
                     $current[$part] = [];
@@ -60,11 +60,11 @@ class ContentManager
     {
         $fullPath = $this->contentDir . '/' . $path;
         $directory = dirname($fullPath);
-        
+
         if (!is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
-        
+
         file_put_contents($fullPath, $content);
     }
 

@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     public function index(Request $request): Response
     {
         $submittedPassword = $request->query->get('password');
-        
+
         if ($submittedPassword !== $this->adminPassword) {
             return $this->render('@MarkFlatEditor/admin/login.html.twig');
         }

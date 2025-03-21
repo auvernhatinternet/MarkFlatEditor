@@ -29,7 +29,10 @@
     "require-dev": {
         "symfony/phpunit-bridge": "^7.0",
         "symfony/var-dumper": "^7.0",
-        "phpstan/phpstan": "2.1.x-dev"
+        "phpstan/phpstan": "2.1.x-dev",
+        "phpunit/phpunit": "^12.1@dev",
+        "symfony/yaml": "7.3.x-dev",
+        "friendsofphp/php-cs-fixer": "dev-master"
     },
     "minimum-stability": "dev",
     "extra": {
